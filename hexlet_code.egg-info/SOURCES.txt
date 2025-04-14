@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+gendiff/__init__.py
+gendiff/scripts/__init__.py
+gendiff/scripts/gendiff.py
+hexlet_code.egg-info/PKG-INFO
+hexlet_code.egg-info/SOURCES.txt
+hexlet_code.egg-info/dependency_links.txt
+hexlet_code.egg-info/top_level.txt

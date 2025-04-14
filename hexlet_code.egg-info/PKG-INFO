@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: hexlet-code
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+### Hexlet tests and linter status:
+[![Actions Status](https://github.com/lawyer-arch/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/lawyer-arch/python-project-50/actions)
