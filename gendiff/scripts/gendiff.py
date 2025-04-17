@@ -8,22 +8,26 @@ def load_json(filepath):
         return json.load(f)
 
 # Функция для форматирования различий между двумя словарями
-def format_diff(dict1, dict2):
+def generate_diff(dict1, dict2):
     result = []
     all_keys = sorted(dict1.keys() | dict2.keys())  # Все уникальные ключи из обоих словарей
-    shared_key = dict1.keys() & dict2.keys()  # Общие ключи у двух словарей
-
+    shared_keys = dict1.keys() & dict2.keys()  # Общие ключи у двух словарей
+    prefixes = {
+    'unchanged': '    ',
+    'removed': '  - ',
+    'added': '  + ',
+    }   
     for key in all_keys:
-        if key in shared_key:
+        if key in shared_keys:
             if dict1[key] == dict2[key]:
-                result.append(f"  {key}: {dict1[key]}")
+                result.append(f"{prefixes['unchanged']}{key}: {dict1[key]}")
             else:
-                result.append(f"  - {key}: {dict1[key]}")
-                result.append(f"  + {key}: {dict2[key]}")
-        elif key in dict1:
-            result.append(f"  - {key}: {dict1[key]}")
-        elif key in dict2:
-            result.append(f"  + {key}: {dict2[key]}")
+                result.append(f"{prefixes['removed']}{key}: {dict1[key]}")
+                result.append(f"{prefixes['added']}{key}: {dict2[key]}")
+        elif key in dict1 and key not in dict2:
+            result.append(f"{prefixes['removed']}{key}: {dict1[key]}")
+        elif key in dict2 and key not in dict1:
+            result.append(f"{prefixes['added']}{key}: {dict2[key]}")
     return "{\n" + "\n".join(result) + "\n}"
 
 # Основная функция, которая принимает аргументы и сравнивает файлы
@@ -41,7 +45,7 @@ def main():
     data2 = load_json(args.second_file)
 
     # Выводим различия между файлами
-    print(format_diff(data1, data2))
+    print(generate_diff(data1, data2))
 
 # Запуск программы
 if __name__ == "__main__":
