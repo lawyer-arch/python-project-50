@@ -1,0 +1,38 @@
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Конфигурационные файлы IDE
+.vscode/
+.idea/
+
+# Папки с виртуальными окружениями
+.venv/
+env/
+venv/
+
+# Файлы зависимостей
+*.egg
+*.egg-info
+dist/
+build/
+
+# Логи
+*.log
+
+# Файлы настроек pytest
+.cache/
+
+# Файлы для проверки
+*.pdb
+*.swp
+
+# Файлы для теста системы на месте
+file1.json
+file2.json
+*.cast

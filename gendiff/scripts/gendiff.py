@@ -2,16 +2,22 @@ import argparse
 import json
 import os
 
+
 # Функция для загрузки данных из JSON файла
 def load_json(filepath):
     with open(os.path.expanduser(filepath), 'r') as f:
         return json.load(f)
 
+
 # Функция для форматирования различий между двумя словарями
 def generate_diff(dict1, dict2):
     result = []
-    all_keys = sorted(dict1.keys() | dict2.keys())  # Все уникальные ключи из обоих словарей
-    shared_keys = dict1.keys() & dict2.keys()  # Общие ключи у двух словарей
+    # Все уникальные ключи из обоих словарей
+    all_keys = sorted(
+        dict1.keys() | dict2.keys()
+    )
+    # Общие ключи у двух словарей
+    shared_keys = dict1.keys() & dict2.keys()
     prefixes = {
     'unchanged': '    ',
     'removed': '  - ',
@@ -30,6 +36,7 @@ def generate_diff(dict1, dict2):
             result.append(f"{prefixes['added']}{key}: {dict2[key]}")
     return "{\n" + "\n".join(result) + "\n}"
 
+
 # Основная функция, которая принимает аргументы и сравнивает файлы
 def main():
     parser = argparse.ArgumentParser(
@@ -37,7 +44,11 @@ def main():
     )
     parser.add_argument("first_file")  # Путь к первому файлу
     parser.add_argument("second_file")  # Путь ко второму файлу
-    parser.add_argument('-f', '--format', help="set format of output")  # Формат вывода
+    # Формат вывода
+    parser.add_argument(
+        '-f', '--format', 
+        help="set format of output"
+    )
     args = parser.parse_args()
 
     # Загружаем данные из файлов
@@ -46,6 +57,7 @@ def main():
 
     # Выводим различия между файлами
     print(generate_diff(data1, data2))
+
 
 # Запуск программы
 if __name__ == "__main__":
