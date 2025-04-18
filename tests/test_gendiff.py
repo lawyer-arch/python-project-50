@@ -1,3 +1,6 @@
+from gendiff.scripts.gendiff import generate_diff
+
+
 def test_generate_diff():
     dict1 = {
         "host": "hexlet.io",
