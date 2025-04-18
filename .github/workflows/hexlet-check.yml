@@ -29,6 +29,7 @@ jobs:
           source .venv/bin/activate
           pip install uv
           uv pip install .[dev]
+          pip install ruff  # Устанавливаем ruff в виртуальное окружение
 
       - name: Run linter and pytest
         run: |
