@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv pip install .
+          uv pip install . --system
 
       - name: Run linter and pytest
         run: |
