@@ -1,18 +1,18 @@
-.PHONY: lint
+.PHONY: lint test format test-coverage check install
 
 install:
 	uv pip install .[dev]
 
 lint:
-	uv run ruff check .
+	ruff check .
 
 format:
-	uv run ruff check --fix .
+	ruff check --fix .
 
 test:
-	uv run pytest
+	pytest
 
 test-coverage:
-	uv run pytest --cov=gendiff --cov-report=xml
+	pytest --cov=gendiff --cov-report=xml
 
 check: lint test
