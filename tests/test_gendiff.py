@@ -1,5 +1,8 @@
+
 import re
+
 from gendiff.scripts.gendiff import generate_diff
+
 
 def test_generate_diff():
     dict1 = {
@@ -27,5 +30,7 @@ def test_generate_diff():
         # Убираем лишние пробелы в начале и в конце строк и нормализуем пробелы
         return re.sub(r'\s+', ' ', s.strip())
 
-    assert normalize_string(generate_diff(dict1, dict2)) == \
-           normalize_string(expected)
+    assert (
+        normalize_string(generate_diff(dict1, dict2))
+        == normalize_string(expected)
+    )
