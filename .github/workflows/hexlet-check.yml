@@ -23,13 +23,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install uv and create virtual environment
+      - name: Install dependencies and create virtual environment
         run: |
           python -m venv .venv
           source .venv/bin/activate
+          pip install --upgrade pip
           pip install uv
-          uv pip install .[dev]
-          pip install ruff  # Устанавливаем ruff в виртуальное окружение
+          uv pip install .[dev]  # Устанавливаем зависимости для разработки
 
       - name: Run linter and pytest
         run: |
