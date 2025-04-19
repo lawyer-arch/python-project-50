@@ -20,11 +20,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Set up Python and install dependencies
         run: |
-          pip install uv
-          uv pip install pytest pytest-cov
-          uv pip install .  # установка текущей библиотеки
+          python -m pip install --upgrade pip
+          pip install .[dev]
 
       - name: Run tests with coverage
         run: pytest --cov=gendiff --cov-report=xml
@@ -32,5 +31,6 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
-          organization: ${{ secrets.SONAR_ORG }}
+          organization: lawyer-arch
+          projectKey: lawyer-arch_python-project-50
           token: ${{ secrets.SONAR_TOKEN }}
