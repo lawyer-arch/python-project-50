@@ -27,4 +27,7 @@ select = ["E", "F", "I", "C90"]
 "__init__.py" = ["F401"]
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-cov", "ruff"]
+dev = ["pytest", "pytest-cov", "coverage", "ruff"]
+
+[tool.coverage.run]
+omit = ["hello.py"]
