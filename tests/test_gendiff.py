@@ -8,7 +8,7 @@ def test_generate_diff():
     dict1 = {
         "host": "hexlet.io",
         "timeout": 50,
-        "proxy": "123.234.53.22", # nosec: hardcoded IP is used for testing only
+        "proxy": "123.234.53.22",  # nosec: hardcoded IP is used for testing only
         "follow": False
     }
     dict2 = {
@@ -20,7 +20,7 @@ def test_generate_diff():
     expected = '''{
       - follow: False
       host: hexlet.io
-      - proxy: 123.234.53.22, # nosec: hardcoded IP is used for testing only
+      - proxy: 123.234.53.22
       - timeout: 50
       + timeout: 20
       + verbose: True
