@@ -35,5 +35,7 @@ jobs:
             -Dsonar.projectKey=lawyer-arch_python-project-50
             -Dsonar.organization=lawyer-arch
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.projectName=gendiff
+            -Dsonar.projectVersion=0.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

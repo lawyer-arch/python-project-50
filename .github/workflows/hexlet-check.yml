@@ -40,17 +40,16 @@ jobs:
         run: |
           source .venv/bin/activate
           make test-coverage
-
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=your_project_key
-            -Dsonar.organization=your_organization
+            -Dsonar.projectKey=lawyer-arch_python-project-50
+            -Dsonar.organization=lawyer-arch
             -Dsonar.python.coverage.reportPaths=coverage.xml
-
+  
       - name: Hexlet project check
         uses: hexlet/project-action@release
         with:
