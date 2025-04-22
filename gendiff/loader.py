@@ -1,7 +1,7 @@
-import yaml
 import json
-
 import os
+
+import yaml
 
 
 # Формируем словарь для обработки
