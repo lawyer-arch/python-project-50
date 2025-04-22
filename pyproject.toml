@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pyyaml"
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -31,3 +33,4 @@ dev = ["pytest", "pytest-cov", "coverage", "ruff"]
 
 [tool.coverage.run]
 omit = ["hello.py"]
+

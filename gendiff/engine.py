@@ -1,4 +1,4 @@
-from .formatters.stylish import get_formatter
+from .formatters.stylish import format
 from .loader import load_file
 
 
@@ -22,5 +22,5 @@ def generate_diff(path1, path2, format_name="stylish"):
         else:
             diff.append(("added", key, dict2[key]))
 
-    formatter = get_formatter(format_name)
+    formatter = format(format_name)
     return formatter(diff)

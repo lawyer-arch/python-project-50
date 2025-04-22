@@ -1,4 +1,4 @@
-def get_formatter(diff):
+def format(diff):
     result = []
     prefixes = {
         "unchanged": "    ",
