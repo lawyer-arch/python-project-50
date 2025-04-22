@@ -1,6 +1,7 @@
 
 import os
 import textwrap
+
 from gendiff.engine import generate_diff
 
 

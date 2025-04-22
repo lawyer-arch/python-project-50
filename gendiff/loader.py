@@ -1,11 +1,9 @@
-import json
 import os
+import json
 import yaml
 
 
 # Формируем словарь для обработки
-
-
 def load_file(file_path):
     _, ext = os.path.splitext(file_path)
 
@@ -18,5 +16,6 @@ def load_file(file_path):
             raise ValueError(f"Неподдерживаемый формат файла: {ext}")
 
     if not isinstance(data, dict):
-        raise ValueError(f"Ожидался словарь, но получен {type(data).__name__} в файле {file_path}")
+        raise ValueError(f"Ожидался словарь, но получен {type(data).__name__} "
+                         f"в файле {file_path}")
     return data
