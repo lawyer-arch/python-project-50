@@ -1,8 +1,10 @@
 import json
-import yaml
 import os
+import yaml
 
-############ Формируем словарь для обработки #############
+
+# Формируем словарь для обработки
+
 
 def load_file(file_path):
     _, ext = os.path.splitext(file_path)
@@ -18,5 +20,3 @@ def load_file(file_path):
     if not isinstance(data, dict):
         raise ValueError(f"Ожидался словарь, но получен {type(data).__name__} в файле {file_path}")
     return data
-
-# print(load_file()) для проверки

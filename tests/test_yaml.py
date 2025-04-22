@@ -1,9 +1,7 @@
 
 import os
 import textwrap
-
 from gendiff.engine import generate_diff
-
 
 
 def test_generate_diff_yaml():
