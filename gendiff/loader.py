@@ -16,6 +16,8 @@ def load_file(file_path):
         else:
             raise ValueError(f"Неподдерживаемый формат файла: {ext}")
 
+    print(f"Загруженные данные из {file_path}: {data}")  # Отладочный вывод
+    
     if not isinstance(data, dict):
         raise ValueError(
             f"Ожидался словарь, но получен {type(data).__name__} "

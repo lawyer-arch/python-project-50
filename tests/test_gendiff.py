@@ -1,30 +1,28 @@
-import re
-
+import os
+import textwrap
 from gendiff.scripts.gendiff import generate_diff
 
-
 def test_generate_diff():
-    dict1 = {
-        "host": "hexlet.io",
-        "timeout": 50,
-        "proxy": "123.234.53.22",  # nosec: hardcoded IP is used for testing only
-        "follow": False,
-    }
-    dict2 = {"timeout": 20, "verbose": True, "host": "hexlet.io"}
+    # Путь к директории, где находятся тестовые файлы
+    BASE_DIR = os.path.dirname(__file__)
 
-    expected = """{
+    # Путь к файлам с данными
+    file1 = os.path.join(BASE_DIR, "fixtures", "dict1.json")
+    file2 = os.path.join(BASE_DIR, "fixtures", "dict2.json")
+
+    # Ожидаемый результат
+    expected = textwrap.dedent("""\
+    {
       - follow: False
       host: hexlet.io
       - proxy: 123.234.53.22
       - timeout: 50
       + timeout: 20
       + verbose: True
-    }"""
+    }""")
 
-    def normalize_string(s):
-        # Убираем лишние пробелы в начале и в конце строк и нормализуем пробелы
-        return re.sub(r"\s+", " ", s.strip())
+    # Вызов функции generate_diff с путями к файлам
+    result = generate_diff(file1, file2, format_name="stylish")
 
-    assert normalize_string(generate_diff(dict1, dict2)) == normalize_string(
-        expected
-    )
+    # Сравнение результата с ожидаемым значением
+    assert result.strip() == expected.strip()

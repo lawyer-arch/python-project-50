@@ -1,4 +1,4 @@
-from .stylish import format as format_stylish
+from .stylish import format_stylish
 
 
 def get_formatter(name):

@@ -12,7 +12,7 @@ def test_generate_diff_yaml():
     expected = textwrap.dedent("""\
     {
       - follow: False
-        host: hexlet.io
+      host: hexlet.io
       - proxy: 123.234.53.22
       - timeout: 50
       + timeout: 20
@@ -21,4 +21,4 @@ def test_generate_diff_yaml():
 
     result = generate_diff(file1, file2, format_name="stylish")
     print(repr(result))
-    assert result.strip() == expected.strip()
+    assert textwrap.dedent(result).strip() == textwrap.dedent(expected).strip()

@@ -1,10 +1,13 @@
-from .formatters.stylish import format
+from .formatters import get_formatter
 from .loader import load_file
 
 
 def generate_diff(path1, path2, format_name="stylish"):
-    dict1 = load_file(path1)
-    dict2 = load_file(path2)
+    if isinstance(path1, dict) and isinstance(path2, dict):
+        dict1, dict2 = path1, path2
+    else:
+        dict1 = load_file(path1)
+        dict2 = load_file(path2)
 
     diff = []
     all_keys = sorted(dict1.keys() | dict2.keys())
@@ -22,5 +25,9 @@ def generate_diff(path1, path2, format_name="stylish"):
         else:
             diff.append(("added", key, dict2[key]))
 
-    formatter = format(format_name)
+    # Отладочный вывод
+    print("Diff to be formatted:", diff)
+
+    # Передаем данные в форматтер
+    formatter = get_formatter(format_name)
     return formatter(diff)
