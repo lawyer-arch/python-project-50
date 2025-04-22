@@ -1,4 +1,3 @@
-
 import re
 
 from gendiff.scripts.gendiff import generate_diff
@@ -9,28 +8,23 @@ def test_generate_diff():
         "host": "hexlet.io",
         "timeout": 50,
         "proxy": "123.234.53.22",  # nosec: hardcoded IP is used for testing only
-        "follow": False
+        "follow": False,
     }
-    dict2 = {
-        "timeout": 20,
-        "verbose": True,
-        "host": "hexlet.io"
-    }
+    dict2 = {"timeout": 20, "verbose": True, "host": "hexlet.io"}
 
-    expected = '''{
+    expected = """{
       - follow: False
       host: hexlet.io
       - proxy: 123.234.53.22
       - timeout: 50
       + timeout: 20
       + verbose: True
-    }'''
+    }"""
 
     def normalize_string(s):
         # Убираем лишние пробелы в начале и в конце строк и нормализуем пробелы
-        return re.sub(r'\s+', ' ', s.strip())
+        return re.sub(r"\s+", " ", s.strip())
 
-    assert (
-        normalize_string(generate_diff(dict1, dict2))
-        == normalize_string(expected)
+    assert normalize_string(generate_diff(dict1, dict2)) == normalize_string(
+        expected
     )
