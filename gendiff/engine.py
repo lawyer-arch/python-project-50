@@ -1,5 +1,5 @@
+from .formatters.stylish import get_formatter
 from .loader import load_file
-from .formatters import get_formatter
 
 
 def generate_diff(path1, path2, format_name="stylish"):
