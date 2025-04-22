@@ -22,15 +22,9 @@ line-length = 80
 [tool.ruff.lint]
 preview = true
 select = ["E", "F", "I", "C90"]
-fix = true
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
-
-[tool.ruff]
-select = ["I001", "E501", "E302", "E305"]
-fix = true
-extend-ignore = []
 
 [project.optional-dependencies]
 dev = ["pytest", "pytest-cov", "coverage", "ruff"]
