@@ -1,6 +1,8 @@
 import os
 import textwrap
+
 from gendiff.scripts.gendiff import generate_diff
+
 
 def test_generate_diff():
     # Путь к директории, где находятся тестовые файлы
