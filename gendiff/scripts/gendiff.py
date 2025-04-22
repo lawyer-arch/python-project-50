@@ -1,12 +1,26 @@
 import argparse
 import json
 import os
+import yaml
 
 
-# Функция для загрузки данных из JSON файла
-def load_json(filepath):
-    with open(os.path.expanduser(filepath), 'r') as f:
-        return json.load(f)
+
+############ Формируем словарь для обработки #############
+
+def load_file(file_path):
+    _, ext = os.path.splitext(file_path)
+
+    with open(file_path, 'r') as f:
+        if ext in ['.yaml', '.yml']:
+            data = yaml.safe_load(f)
+        elif ext == '.json':
+            data = json.load(f)
+        else:
+            raise ValueError(f"Неподдерживаемый формат файла: {ext}")
+
+    if not isinstance(data, dict):
+        raise ValueError(f"Ожидался словарь, но получен {type(data).__name__} в файле {file_path}")
+    return data
 
 
 # Функция для форматирования различий между двумя словарями
@@ -42,23 +56,36 @@ def main():
     parser = argparse.ArgumentParser(
         description="Compares two configuration files and shows a difference."
     )
-    parser.add_argument("first_file")  # Путь к первому файлу
-    parser.add_argument("second_file")  # Путь ко второму файлу
-    # Формат вывода
+    parser.add_argument("first_file")
+    parser.add_argument("second_file")
     parser.add_argument(
-        '-f', '--format', 
-        help="set format of output"
+        '-f', '--format',
+        help="set format of output",
+        default="stylish"
     )
     args = parser.parse_args()
 
-    # Загружаем данные из файлов
-    data1 = load_json(args.first_file)
-    data2 = load_json(args.second_file)
+    try:
+        data1 = load_file(args.first_file)
+        data2 = load_file(args.second_file)
+    except Exception as e:
+        print(f"Ошибка: {e}")
+        return
 
-    # Выводим различия между файлами
-    print(generate_diff(data1, data2))
+    diff = generate_diff(data1, data2)
+    
+    print(diff)
 
 
 # Запуск программы
 if __name__ == "__main__":
     main()
+
+
+# from gendiff.core import run_diff
+# from gendiff.loader import load_file  # сам выберет по расширению .json/.yaml
+# from gendiff.diff import generate_diff
+# from gendiff.formatters import format_diff
+
+# def main():
+#     run_diff(load_file, generate_diff, format_diff)
