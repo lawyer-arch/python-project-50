@@ -33,6 +33,4 @@ build/
 *.swp
 
 # Файлы для теста системы на месте
-file1.json
-file2.json
 *.cast
