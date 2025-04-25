@@ -23,7 +23,7 @@ def test_generate_diff_yaml():
             }
             setting6: {
                 doge: {
-                  - wow:
+                  - wow: 
                   + wow: so much
                 }
                 key: value
@@ -46,9 +46,9 @@ def test_generate_diff_yaml():
             }
         }
       + group3: {
-           deep: {
-               id: {
-                   number: 45
+            deep: {
+                id: {
+                    number: 45
                 }
             }
             fee: 100500
