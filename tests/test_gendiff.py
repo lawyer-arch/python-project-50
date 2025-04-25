@@ -15,12 +15,12 @@ def test_generate_diff():
     # Ожидаемый результат
     expected = textwrap.dedent("""\
     {
-      - follow: False
+      - follow: false
       host: hexlet.io
       - proxy: 123.234.53.22
       - timeout: 50
       + timeout: 20
-      + verbose: True
+      + verbose: true
     }""")
 
     # Вызов функции generate_diff с путями к файлам

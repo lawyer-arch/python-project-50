@@ -1,15 +1,40 @@
-def format_stylish(diff):
-    result = []
-    prefixes = {
-        "unchanged": "  ",
-        "removed": "  - ",
-        "added": "  + ",
-    }
+def format_stylish(diff, depth=0):
+    def stringify(value, depth):
+        if isinstance(value, dict):
+            lines = []
+            for k, v in value.items():
+                lines.append(f"{get_indent(depth + 1)}  {k}: {stringify(v, depth + 1)}")
+            return "{\n" + "\n".join(lines) + f"\n{get_indent(depth)} }}"
+    # Преобразуем None в null, False/True в false/true
+        elif value is None:
+            return "null"
+        elif isinstance(value, bool):
+            return "true" if value else "false"
+        return str(value)
 
-    # ✅ Сортируем diff по ключу (line[1])
-    diff = sorted(diff, key=lambda x: x[1])
+    def get_indent(depth):
+        return " " * (depth * 4)
 
-    for line in diff:
-        result.append(f"{prefixes[line[0]]}{line[1]}: {line[2]}")
+    def format_line(key, value, depth, prefix=' '):
+        return f"{get_indent(depth)}{prefix} {key}: {stringify(value, depth)}"
 
-    return "{\n" + "\n".join(result) + "\n}"
+    lines = []
+
+    for node in diff:
+        key = node["key"]
+        node_type = node["type"]
+
+        if node_type == "nested":
+            children = format_stylish(node["children"], depth + 1)
+            lines.append(f"{get_indent(depth)}  {key}: {{\n{children}\n{get_indent(depth)}  }}")
+        elif node_type == "unchanged":
+            lines.append(format_line(key, node["value"], depth, ' '))
+        elif node_type == "removed":
+            lines.append(format_line(key, node["value"], depth, '-'))
+        elif node_type == "added":
+            lines.append(format_line(key, node["value"], depth, '+'))
+        elif node_type == "changed":
+            lines.append(format_line(key, node["old_value"], depth, '-'))
+            lines.append(format_line(key, node["new_value"], depth, '+'))
+
+    return f"{{\n{'\n'.join(lines)}\n{get_indent(depth)}}}"

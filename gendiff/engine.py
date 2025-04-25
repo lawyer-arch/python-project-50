@@ -1,33 +1,14 @@
-from .formatters import get_formatter
 from .loader import load_file
+from .formatters import get_formatter
+from .diff_builder import build_diff
 
 
 def generate_diff(path1, path2, format_name="stylish"):
-    if isinstance(path1, dict) and isinstance(path2, dict):
-        dict1, dict2 = path1, path2
-    else:
-        dict1 = load_file(path1)
-        dict2 = load_file(path2)
+    dict1 = load_file(path1) if not isinstance(path1, dict) else path1
+    dict2 = load_file(path2) if not isinstance(path2, dict) else path2
 
-    diff = []
-    all_keys = sorted(dict1.keys() | dict2.keys())
-    shared_keys = dict1.keys() & dict2.keys()
+    diff = build_diff(dict1, dict2)
 
-    for key in all_keys:
-        if key in shared_keys:
-            if dict1[key] == dict2[key]:
-                diff.append(("unchanged", key, dict1[key]))
-            else:
-                diff.append(("removed", key, dict1[key]))
-                diff.append(("added", key, dict2[key]))
-        elif key in dict1:
-            diff.append(("removed", key, dict1[key]))
-        else:
-            diff.append(("added", key, dict2[key]))
-
-    # Отладочный вывод
-    print("Diff to be formatted:", diff)
-
-    # Передаем данные в форматтер
     formatter = get_formatter(format_name)
+    print(f"Result:\n{repr(formatter(diff))}")
     return formatter(diff)
