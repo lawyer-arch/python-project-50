@@ -1,6 +1,6 @@
-from .loader import load_file
-from .formatters import get_formatter
 from .diff_builder import build_diff
+from .formatters import get_formatter
+from .loader import load_file
 
 
 def generate_diff(path1, path2, format_name="stylish"):

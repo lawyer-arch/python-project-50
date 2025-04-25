@@ -1,20 +1,22 @@
+def get_indent(depth):
+    return " " * (depth * 4)
+
+
+def stringify(value, depth):
+    if isinstance(value, dict):
+        lines = [
+            f"{get_indent(depth + 1)}  {k}: {stringify(v, depth + 1)}"
+            for k, v in value.items()
+        ]
+        return "{\n" + "\n".join(lines) + f"\n{get_indent(depth)} }}"
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    return str(value)
+
+
 def format_stylish(diff, depth=0):
-    def stringify(value, depth):
-        if isinstance(value, dict):
-            lines = []
-            for k, v in value.items():
-                lines.append(f"{get_indent(depth + 1)}  {k}: {stringify(v, depth + 1)}")
-            return "{\n" + "\n".join(lines) + f"\n{get_indent(depth)} }}"
-    # Преобразуем None в null, False/True в false/true
-        elif value is None:
-            return "null"
-        elif isinstance(value, bool):
-            return "true" if value else "false"
-        return str(value)
-
-    def get_indent(depth):
-        return " " * (depth * 4)
-
     def format_line(key, value, depth, prefix=' '):
         return f"{get_indent(depth)}{prefix} {key}: {stringify(value, depth)}"
 
@@ -26,7 +28,11 @@ def format_stylish(diff, depth=0):
 
         if node_type == "nested":
             children = format_stylish(node["children"], depth + 1)
-            lines.append(f"{get_indent(depth)}  {key}: {{\n{children}\n{get_indent(depth)}  }}")
+            lines.append(
+                f"{get_indent(depth)}  {key}: {{\n"
+                f"{children}\n"
+                f"{get_indent(depth)}  }}"
+                )
         elif node_type == "unchanged":
             lines.append(format_line(key, node["value"], depth, ' '))
         elif node_type == "removed":
