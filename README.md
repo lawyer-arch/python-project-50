@@ -8,4 +8,8 @@
 
 ### VIDEO File asciinema
 
+[video gendiff_file.cast](https://asciinema.org/a/G64TG227y5p5eX35GprmYoE44)
+
+[video gendiff_yaml.cast](https://asciinema.org/a/37nwSIIExOWAmqpjirMloi6bw)
+
 [video test_json_recursion.cast](https://asciinema.org/a/Zd5PvHZOn8ObyNgXsqTSOp1l2)
