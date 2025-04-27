@@ -4,3 +4,8 @@
 
 ### SonarQube code scanning:
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=lawyer-arch_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=lawyer-arch_python-project-50)
+
+
+### VIDEO File asciinema
+
+[video test_json_recursion.cast](https://asciinema.org/a/Zd5PvHZOn8ObyNgXsqTSOp1l2)
