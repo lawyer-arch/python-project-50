@@ -15,8 +15,6 @@ def load_file(file_path):
             data = json.load(f)
         else:
             raise ValueError(f"Неподдерживаемый формат файла: {ext}")
-
-    print(f"Загруженные данные из {file_path}: {data}")  # Отладочный вывод
     
     if not isinstance(data, dict):
         raise ValueError(

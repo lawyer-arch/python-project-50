@@ -56,7 +56,4 @@ def test_generate_diff_yaml():
     }""")
 
     result = generate_diff(file1, file2, format_name="stylish")
-   
-    print(f"Expected:\n{repr(expected)}")
-    print(f"Result:\n{repr(result)}")
     assert textwrap.dedent(result).strip() == textwrap.dedent(expected).strip()
