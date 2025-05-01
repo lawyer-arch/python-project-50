@@ -13,3 +13,5 @@
 [video gendiff_yaml.cast](https://asciinema.org/a/37nwSIIExOWAmqpjirMloi6bw)
 
 [video test_json_recursion.cast](https://asciinema.org/a/Zd5PvHZOn8ObyNgXsqTSOp1l2)
+
+[video test_plain.cast](https://asciinema.org/a/QjwnynfbiOdNO4FDBeIaNkr2o)
