@@ -9,7 +9,7 @@ def test_generate_diff_plain():
     file1 = os.path.join(BASE_DIR, "fixtures", "file1.json")
     file2 = os.path.join(BASE_DIR, "fixtures", "file2.json")
 
-    expected_data = ("""[
+    expected_data = json.loads("""[
     {
       "key": "common",
       "type": "nested",
@@ -124,8 +124,8 @@ def test_generate_diff_plain():
         "fee": 100500
       }
     }
-    ]""")
+  ]""")
 
-    expected = json.dumps(expected_data, indent=2)
     result = generate_diff(file1, file2, format_name="json")
-    assert result == expected
+    parsed_result = json.loads(result)
+    assert parsed_result == expected_data
