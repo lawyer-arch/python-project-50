@@ -33,8 +33,8 @@ def format_plain(diff, path=""):
             new_value = node.get("new_value")
             lines.append(
                 f"Property '{new_path}' was updated. "
-                f"From {stringify_plain(old_value)} "
-                f"to {stringify_plain(new_value)}"
+                f"From {stringify_plain(old_value)}"
+                f" to {stringify_plain(new_value)}"
             )
         else:
             pass
