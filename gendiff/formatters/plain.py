@@ -43,4 +43,4 @@ def format_plain(diff, path=""):
 
 def to_plain_string(diff):
     lines = format_plain(diff)
-    return '\n'.join(lines) + '\n' if lines else ''
+    return '\n'.join(lines) if lines else ''
